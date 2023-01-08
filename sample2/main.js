@@ -57,7 +57,8 @@ arToolkitContext.init(() => {
 
 const arMarkerControls = new THREEx.ArMarkerControls(arToolkitContext, camera, {
   type: 'pattern',
-  patternUrl: 'data/patt.hiro',
+  // patternUrl: 'data/patt.hiro',
+  patternUrl: './pattern-marker.patt',
   changeMatrixMode: 'cameraTransformMatrix'
 });
 
