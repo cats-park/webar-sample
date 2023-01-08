@@ -1,4 +1,5 @@
 
+const main = document.querySelector('.main');
 
 
 const renderer = new THREE.WebGLRenderer({
@@ -12,7 +13,7 @@ renderer.domElement.style.position = 'absolute';
 renderer.domElement.style.top = '0px';
 renderer.domElement.style.left = '0px';
 
-document.body.appendChild(renderer.domElement);
+main.appendChild(renderer.domElement);
 
 
 const scene = new THREE.Scene();
@@ -22,7 +23,7 @@ const camera = new THREE.Camera();
 scene.add(camera);
 
 
-const arToolkitSource = new THREEx.arToolkitSource({
+const arToolkitSource = new THREEx.ArToolkitSource({
   sourceType: 'webcam'
 });
 
@@ -39,13 +40,13 @@ document.addEventListener('resize', () => {
 
 const onResize = () => {
   arToolkitSource.onResizeElement();
-  arToolkitSource.copyElementSizeTo(renderer, domElement);
+  arToolkitSource.copyElementSizeTo(renderer.domElement);
   if (arToolkitContext.arController != null) {
     arToolkitSource.copyElementSizeTo(arToolkitContext.arController.canvas);
   }
 };
 
-const arToolkitContext = new THREEx.arToolkitContext({
+const arToolkitContext = new THREEx.ArToolkitContext({
   cameraParameterUrl: 'data/camera_para.dat',
   detectionMode: 'mono'
 });
@@ -54,7 +55,7 @@ arToolkitContext.init(() => {
   camera.projectionMatrix.copy(arToolkitContext.getProjectionMatrix());
 });
 
-const arMarkerControls = new THREEx.arMarkerControls(arToolkitContext, camera, {
+const arMarkerControls = new THREEx.ArMarkerControls(arToolkitContext, camera, {
   type: 'pattern',
   patternUrl: 'data/patt.hiro',
   changeMatrixMode: 'cameraTransformMatrix'
@@ -69,7 +70,7 @@ scene.add(mesh);
 
 
 const clock = new THREE.Clock();
-requestAnimationFrame(function animatite() {
+requestAnimationFrame(function animate() {
   requestAnimationFrame(animate);
   if (arToolkitSource.ready) {
     arToolkitContext.update(arToolkitSource.domElement);
