@@ -39,8 +39,8 @@ document.addEventListener('resize', () => {
 
 const onResize = () => {
   arToolkitSource.onResizeElement();
-  arToolkitSource.copyElementSizeTo(renderer,domElement);
-  if(arToolkitContext.arController != null) {
+  arToolkitSource.copyElementSizeTo(renderer, domElement);
+  if (arToolkitContext.arController != null) {
     arToolkitSource.copyElementSizeTo(arToolkitContext.arController.canvas);
   }
 };
@@ -61,7 +61,7 @@ const arMarkerControls = new THREEx.arMarkerControls(arToolkitContext, camera, {
 });
 
 const mesh = new THREE.Mesh(
-  new THREE.CubeGeometry(1,1,1),
+  new THREE.CubeGeometry(1, 1, 1),
   new THREE.MeshNormalMaterial()
 );
 mesh.position.y = 1.0;
@@ -71,7 +71,7 @@ scene.add(mesh);
 const clock = new THREE.Clock();
 requestAnimationFrame(function animatite() {
   requestAnimationFrame(animate);
-  if(arToolkitSource.ready) {
+  if (arToolkitSource.ready) {
     arToolkitContext.update(arToolkitSource.domElement);
     scene.visible = camera.visible;
   }
